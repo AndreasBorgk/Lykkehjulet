@@ -1,23 +1,36 @@
 package com.example.wheeloffortune.Data
 
+import android.provider.UserDictionary
 import com.example.wheeloffortune.Model.Affirmation
 import com.example.wheeloffortune.R
 
 
-class DataSource {
+/* class DataSource {
 
-    fun loadAffirmations() : List <Affirmation> {
-        return listOf<Affirmation>(
-            Affirmation(R.string.affirmation1),
-            Affirmation(R.string.affirmation2),
-            Affirmation(R.string.affirmation3),
-            Affirmation(R.string.affirmation4),
-            Affirmation(R.string.affirmation5),
-            Affirmation(R.string.affirmation6),
-            Affirmation(R.string.affirmation7),
-            Affirmation(R.string.affirmation8),
-            Affirmation(R.string.affirmation9),
-            Affirmation(R.string.affirmation10)
+    fun loadChosenCategory(): List<ChosenCategory> {
+        return listOf(
+            ChosenCategory(
+                name = "Computerspil",
+                words = listOf(
+                    "Counter-Strike",
+                    "League of Legends",
+                    "Battlefield",
+                    "Age of Empires",
+                    "Minecraft",
+                    "World of Warcraft"
+                )
+            ),
+            ChosenCategory(
+                name = "Danske byer",
+                words = listOf(
+                    "Sønderborg",
+                    "Aalborg",
+                    "Valby",
+                    "Haderslev",
+                    "Guderup",
+                    "Hvide Sande" <--
+                )
+            ),
         )
     }
-}
+} */

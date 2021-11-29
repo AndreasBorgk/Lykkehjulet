@@ -5,14 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.wheeloffortune.R
 import com.example.wheeloffortune.databinding.GuessWordLayoutBinding
+import com.example.wheeloffortune.viewmodel.GameViewModel
 
 
 class GuessWordFragment  : Fragment(){
     private var _binding: GuessWordLayoutBinding? = null
     private val binding get()=_binding!!
+    private val viewModel: GameViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

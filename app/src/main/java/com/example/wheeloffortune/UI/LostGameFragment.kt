@@ -24,7 +24,7 @@ class LostGameFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.goBackToStart.setOnClickListener {
-            findNavController().navigate(R.id.action_guessWordFragment_to_lostGameFragment)
+            findNavController().navigate(R.id.action_lostGameFragment_to_startGameFragment)
         }
     }
 }
