@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/startGameFragment">
+
+    <fragment
+        android:id="@+id/startGameFragment"
+        android:name="com.example.wheeloffortune.UI.StartGameFragment"
+        android:label="start_game_layout"
+        tools:layout="@layout/start_game_layout" >
+        <action
+            android:id="@+id/action_startGameFragment_to_guessWordFragment"
+            app:destination="@id/guessWordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/guessWordFragment"
+        android:name="com.example.wheeloffortune.UI.GuessWordFragment"
+        android:label="guess_word_layout"
+        tools:layout="@layout/guess_word_layout" >
+        <action
+            android:id="@+id/action_guessWordFragment_to_lostGameFragment"
+            app:destination="@id/lostGameFragment" />
+        <action
+            android:id="@+id/action_guessWordFragment_to_wonGameFragment"
+            app:destination="@id/wonGameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lostGameFragment"
+        android:name="com.example.wheeloffortune.UI.LostGameFragment"
+        android:label="lost_game_layout"
+        tools:layout="@layout/lost_game_layout" >
+        <action
+            android:id="@+id/action_lostGameFragment_to_startGameFragment"
+            app:destination="@id/startGameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/wonGameFragment"
+        android:name="com.example.wheeloffortune.UI.WonGameFragment"
+        android:label="won_game_layout"
+        tools:layout="@layout/won_game_layout" >
+        <action
+            android:id="@+id/action_wonGameFragment_to_startGameFragment"
+            app:destination="@id/startGameFragment" />
+    </fragment>
+</navigation>
