@@ -28,9 +28,17 @@ class GuessWordFragment  : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.apply { guessButton }
+        viewModel.randomTopic()
+        binding.apply {
+            topic.text = viewModel.topic.value.toString()
+            word.text = viewModel.word.value.toString()
+
+
+        }
         binding.guessButton.setOnClickListener {
-            findNavController().navigate(R.id.action_guessWordFragment_to_wonGameFragment)
+            viewModel.guessWord(binding.takeInput.text.toString())
+
+           // findNavController().navigate(R.id.action_guessWordFragment_to_wonGameFragment)
         }
     }
 }

@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.wheeloffortune.Model.Affirmation
+import com.example.wheeloffortune.Model.Word
 import com.example.wheeloffortune.R
 
 class Adapter(
     private val context: Context,
-    private val dataset: List<Affirmation>
+    private val dataset: List<Word>
 ) : RecyclerView.Adapter<Adapter.ItemViewHolder>() {
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
@@ -27,7 +27,7 @@ class Adapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset[position]
-        holder.textView.text = context.resources.getString(item.stringResourceId)
+       // holder.textView.text = context.resources.getString(item.stringResourceId)
     }
 
     override fun getItemCount(): Int {

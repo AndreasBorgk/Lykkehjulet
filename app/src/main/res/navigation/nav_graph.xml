@@ -11,8 +11,8 @@
         android:label="start_game_layout"
         tools:layout="@layout/start_game_layout" >
         <action
-            android:id="@+id/action_startGameFragment_to_guessWordFragment"
-            app:destination="@id/guessWordFragment" />
+            android:id="@+id/action_startGameFragment_to_spinWheelFragment"
+            app:destination="@id/spinWheelFragment" />
     </fragment>
     <fragment
         android:id="@+id/guessWordFragment"
@@ -43,5 +43,14 @@
         <action
             android:id="@+id/action_wonGameFragment_to_startGameFragment"
             app:destination="@id/startGameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/spinWheelFragment"
+        android:name="com.example.wheeloffortune.UI.SpinWheelFragment"
+        android:label="spin_wheel_layout"
+        tools:layout="@layout/spin_wheel_layout" >
+        <action
+            android:id="@+id/action_spinWheelFragment_to_guessWordFragment"
+            app:destination="@id/guessWordFragment" />
     </fragment>
 </navigation>

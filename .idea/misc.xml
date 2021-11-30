@@ -5,10 +5,11 @@
       <map>
         <entry key="..\:/Users/Andreas/AndroidStudioProjects/WheelOfFortune/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Andreas/AndroidStudioProjects/WheelOfFortune/app/src/main/res/layout/fragment_view_model.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/Andreas/AndroidStudioProjects/WheelOfFortune/app/src/main/res/layout/guess_word_layout.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Andreas/AndroidStudioProjects/WheelOfFortune/app/src/main/res/layout/guess_word_layout.xml" value="0.1" />
         <entry key="..\:/Users/Andreas/AndroidStudioProjects/WheelOfFortune/app/src/main/res/layout/list_item.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Andreas/AndroidStudioProjects/WheelOfFortune/app/src/main/res/layout/list_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Andreas/AndroidStudioProjects/WheelOfFortune/app/src/main/res/layout/lost_game_layout.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Andreas/AndroidStudioProjects/WheelOfFortune/app/src/main/res/layout/spin_wheel_layout.xml" value="0.12" />
         <entry key="..\:/Users/Andreas/AndroidStudioProjects/WheelOfFortune/app/src/main/res/layout/start_game_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Andreas/AndroidStudioProjects/WheelOfFortune/app/src/main/res/layout/won_game_layout.xml" value="0.36666666666666664" />
       </map>

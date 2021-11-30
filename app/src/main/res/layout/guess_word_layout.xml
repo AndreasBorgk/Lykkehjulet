@@ -6,16 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".UI.GuessWordFragment">
 
+    <TextView
+        android:id="@+id/topic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topic"
+/>
+
 
     <Button
         android:id="@+id/guess_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Guess"
-        app:layout_constraintBottom_toBottomOf="parent"
-
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/word"  />
+
+    <EditText
+        android:id="@+id/take_input"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guess_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
