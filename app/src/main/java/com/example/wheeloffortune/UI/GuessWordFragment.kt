@@ -49,8 +49,6 @@ class GuessWordFragment  : Fragment(){
             word.text = viewModel.word.value.toString()
             health.text = viewModel.health.value.toString()
             points.text = viewModel.points.value.toString()
-            //spinResult.text = viewModel.spinWheel()
-            //viewModel.DoTurn()
 
 
 

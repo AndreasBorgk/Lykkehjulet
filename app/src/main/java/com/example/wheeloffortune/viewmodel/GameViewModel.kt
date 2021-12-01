@@ -1,12 +1,11 @@
 package com.example.wheeloffortune.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.wheeloffortune.Data.DataSource
-import com.example.wheeloffortune.Model.Word
-import com.example.wheeloffortune.R
 
 class GameViewModel : ViewModel() {
 
@@ -43,10 +42,10 @@ class GameViewModel : ViewModel() {
 
     }
 
-  /*  fun generateUnderScores(words : String) {
+   fun generateUnderScores(words : String) {
         val unders = StringBuilder()
-        words.forEach { char ->
-            if (character == " ") {
+        words.forEach {
+            if ( it == ' ') {
                 unders.append(" ")
 
             } else {
@@ -54,7 +53,7 @@ class GameViewModel : ViewModel() {
             }
 
         }
-    }*/
+    }
 
 
     fun showHealthAndPoints() {
@@ -64,16 +63,22 @@ class GameViewModel : ViewModel() {
 
 
 
-    private var guessedInput = ""
+    private var guessedInputString = ""
 
     fun guessWord(input: String) {
-        guessedInput += input
-        var wordToGuess = word.value
-        var wordContainsInput = word.value?.trim(' ')?.contains(guessedInput, ignoreCase = true)
-        //var inputInWord = wordToGuess?.trim(' ')?.contains(guessedInput, ignoreCase = true)
+        var sanitizedInput = input[0].lowercase()
+       // Log.d("Andreas", sanitizedInput.toString())
+        guessedInputString += sanitizedInput
+       // Log.d("Andreas", guessedInputString.toString())
+        var wordToGuess = word.value?.trim(' ')?.lowercase()
+       // Log.d("Andreas", wordToGuess.toString())
+        var wordContainsInput = wordToGuess?.contains(sanitizedInput.lowercase().toCharArray().first(), ignoreCase = true)
+        //Log.d("Andreas", wordContainsInput.toString())
         val countOfInputInWord = wordToGuess?.count{
-            input.contains(it)
+            //Log.d("Andreas", it.toString() + sanitizedInput.contains(it).toString())
+            sanitizedInput.contains(it)
         }
+        // Log.d("Andreas", countOfInputInWord.toString())
         if (wordContainsInput!!) {
            var pointsToWin = countOfInputInWord!! * 100
             _points.value = points.value!! + pointsToWin
@@ -141,8 +146,7 @@ class GameViewModel : ViewModel() {
         }
 
             return true
-
-
+        result
     }
 
 
