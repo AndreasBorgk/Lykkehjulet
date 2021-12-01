@@ -1,11 +1,12 @@
 package com.example.wheeloffortune.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.wheeloffortune.Data.DataSource
+import com.example.wheeloffortune.Model.Word
+import com.example.wheeloffortune.R
 
 class GameViewModel : ViewModel() {
 
@@ -17,10 +18,11 @@ class GameViewModel : ViewModel() {
 
     val loadCategories = DataSource().words
 
+    private lateinit var underScoreWord: String
+
     private val _character = MutableLiveData<MutableList<Char>>()
     val character: LiveData<List<Char>> = Transformations.map(_character) {
         it.toList()
-
 
 
 
@@ -38,7 +40,28 @@ class GameViewModel : ViewModel() {
         _topic.value = randomGenerator.topic
 
         _word.value = randomGenerator.words.random()
+
     }
+
+  /*  fun generateUnderScores(words : String) {
+        val unders = StringBuilder()
+        words.forEach { char ->
+            if (character == " ") {
+                unders.append(" ")
+
+            } else {
+                unders.append("_")
+            }
+
+        }
+    }*/
+
+
+    fun showHealthAndPoints() {
+        _health.value
+        _points.value
+    }
+
 
 
     private var guessedInput = ""
@@ -46,43 +69,81 @@ class GameViewModel : ViewModel() {
     fun guessWord(input: String) {
         guessedInput += input
         var wordToGuess = word.value
-        var inputInWord = wordToGuess?.trim(' ')?.contains(guessedInput, ignoreCase = true)
+        var wordContainsInput = word.value?.trim(' ')?.contains(guessedInput, ignoreCase = true)
+        //var inputInWord = wordToGuess?.trim(' ')?.contains(guessedInput, ignoreCase = true)
         val countOfInputInWord = wordToGuess?.count{
             input.contains(it)
         }
-        if (inputInWord!!) {
+        if (wordContainsInput!!) {
            var pointsToWin = countOfInputInWord!! * 100
             _points.value = points.value!! + pointsToWin
         } else {
             _health.value = health.value!! - 1
         }
+        val indexes = mutableListOf<Int>()
+
+        wordToGuess?.forEachIndexed { index, char ->
+            if(Char.equals(wordContainsInput)) {
+                indexes.add(index)
+            }
+
+        }
 
     }
 
-    fun spinWheel() {
 
-        var result = when((0..100).random()) {
-            in 0..60 -> "Spin"
-            in 61..75 -> "Ekstra forsøg"
-            in 76..90 -> "Misset tur"
+
+    private fun handleExtraTurn() {
+        print("Extra Turn")
+        _health.value = health.value!! + 1
+    }
+
+    private fun handleMissedTurn() {
+        print("Missed turn and lost a life")
+        _health.value = health.value!! - 1
+    }
+
+
+    private fun handleBankrupt() {
+        print("you are bankrupt")
+        _points.value = 0
+    }
+
+
+
+
+    fun spinWheel(): Boolean {
+
+        val result = when ((0..100).random()) {
+            in 0..65 -> "Guess Word"
+            in 66..81 -> "Ekstra forsøg"
+            in 82..95 -> "Misset tur"
             else -> "bankerot"
         }
-        if(result == "Spin"){
-
-
-        }
-        if(result == "Ekstra forsøg") {
-            _health.value = health.value!! + 1
-            spinWheel()
-
-        }
         if(result == "Misset tur") {
-            _health.value = health.value!! - 1
+            handleMissedTurn()
+
 
         }
         if(result == "bankerot") {
-            _points.value = 0
+            handleBankrupt()
         }
 
+        if(result == "Ekstra forsøg") {
+            handleExtraTurn()
+            return false
+
+        }
+
+        if(result == "Guess Word")
+        {
+            return false
+        }
+
+            return true
+
+
     }
+
+
 }
