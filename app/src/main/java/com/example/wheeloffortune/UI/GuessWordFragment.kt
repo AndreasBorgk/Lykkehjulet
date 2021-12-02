@@ -39,8 +39,8 @@ class GuessWordFragment  : Fragment(){
     }
 
     fun update() {
-        binding.health.text = viewModel.health.value.toString()
-        binding.points.text = viewModel.points.value.toString()
+        binding.health.text = "du har " + viewModel.health.value.toString() + " liv"
+        binding.points.text = "du har " + viewModel.points.value.toString() + " points"
         binding.testWord.text = viewModel.generateUnderScores()
         showRecyclerView()
 
@@ -74,7 +74,7 @@ class GuessWordFragment  : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         viewModel.randomTopic()
         viewModel.showHealthAndPoints()
-        linearLayoutManager = LinearLayoutManager(requireContext())
+        linearLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerView.layoutManager = linearLayoutManager
         adapter = com.example.wheeloffortune.Adapter.Adapter(requireContext(), viewModel.guessedInputList)
         binding.recyclerView.adapter = adapter
