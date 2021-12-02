@@ -17,11 +17,9 @@ class GameViewModel : ViewModel() {
 
     val loadCategories = DataSource().words
 
-    private lateinit var underScoreInsteadOfChar: String
 
     var guessedInputList = mutableListOf<Char>()
 
-    private var usedChars: String = ""
 
     private val _topic = MutableLiveData<String>()
     val topic: LiveData<String> = _topic
@@ -37,8 +35,12 @@ class GameViewModel : ViewModel() {
         _word.value = randomGenerator.words.random()
 
 
+
+
     }
 
+
+// https://www.youtube.com/watch?v=kGGpH7ypxAU - guide to make underscores.
 
     fun generateUnderScores(): String {
         val unders = StringBuilder()
@@ -66,6 +68,8 @@ class GameViewModel : ViewModel() {
         _health.value
         _points.value
     }
+
+
 
     fun inputOK(input: String): Boolean {
         var sanitizedInput = input[0].lowercase().single()
@@ -107,10 +111,10 @@ class GameViewModel : ViewModel() {
             sanitizedInput.contains(it)
         }
 
+        var pointsToWin = countOfInputInWord!! * 2
 
         if (wordContainsInput!!) {
-            var pointsToWin = countOfInputInWord!! * 2
-            Log.d("Andreas", pointsToWin.toString())
+
             _points.value = points.value!! + pointsToWin
             Log.d("Andreas", _points.value.toString())
         } else {
