@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="16dp"
+
     tools:context=".UI.GuessWordFragment">
 
     <TextView
@@ -33,6 +35,19 @@
         />
 
     <TextView
+        android:id="@+id/test_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="_______"
+        android:letterSpacing="0.4"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/take_input"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spin_wheel" />
+
+
+    <TextView
         android:id="@+id/points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,7 +64,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/points"
         />
-
 
 
 
@@ -79,5 +93,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guess_button" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_View"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/test_word"
+        app:layout_constraintEnd_toStartOf="@+id/test_word"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spin_wheel"
+        tools:listitem="@layout/list_item" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

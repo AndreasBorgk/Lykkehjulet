@@ -11,7 +11,7 @@ import com.example.wheeloffortune.R
 
 class Adapter(
     private val context: Context,
-    private val dataset: List<Word>
+    private val dataset: List<Char>
 ) : RecyclerView.Adapter<Adapter.ItemViewHolder>() {
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
@@ -27,7 +27,7 @@ class Adapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset[position]
-       // holder.textView.text = context.resources.getString(item.stringResourceId)
+         holder.textView.text = item.toString()
     }
 
     override fun getItemCount(): Int {

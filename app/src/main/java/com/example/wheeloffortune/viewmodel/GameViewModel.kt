@@ -17,15 +17,11 @@ class GameViewModel : ViewModel() {
 
     val loadCategories = DataSource().words
 
-    private lateinit var underScoreWord: String
+    private lateinit var underScoreInsteadOfChar: String
 
-    private val _character = MutableLiveData<MutableList<Char>>()
-    val character: LiveData<List<Char>> = Transformations.map(_character) {
-        it.toList()
+    var guessedInputList = mutableListOf<Char>()
 
-
-
-    }
+    private var usedChars: String = ""
 
     private val _topic = MutableLiveData<String>()
     val topic: LiveData<String> = _topic
@@ -40,20 +36,30 @@ class GameViewModel : ViewModel() {
 
         _word.value = randomGenerator.words.random()
 
+
     }
 
-   fun generateUnderScores(words : String) {
+
+    fun generateUnderScores(): String {
         val unders = StringBuilder()
-        words.forEach {
-            if ( it == ' ') {
+        word.value?.forEach {
+            if (it == ' ') {
                 unders.append(" ")
 
             } else {
-                unders.append("_")
+                if(guessedInputString.contains(it, ignoreCase = true)){
+                    unders.append(it)
+
+                } else {
+                    unders.append("_")
+                }
             }
 
         }
+        return unders.toString()
     }
+
+
 
 
     fun showHealthAndPoints() {
@@ -61,38 +67,66 @@ class GameViewModel : ViewModel() {
         _points.value
     }
 
+    fun inputOK(input: String): Boolean {
+        var sanitizedInput = input[0].lowercase().single()
+        if(guessedInputList.contains(sanitizedInput) || input.isNullOrEmpty()) {
+            return false
+
+        } else {
+            return true
+        }
+
+    }
 
 
     private var guessedInputString = ""
+    var isWinner = false
 
     fun guessWord(input: String) {
         var sanitizedInput = input[0].lowercase()
-       // Log.d("Andreas", sanitizedInput.toString())
+
+        guessedInputList.add(sanitizedInput.single())
+
+
+
         guessedInputString += sanitizedInput
-       // Log.d("Andreas", guessedInputString.toString())
-        var wordToGuess = word.value?.trim(' ')?.lowercase()
-       // Log.d("Andreas", wordToGuess.toString())
-        var wordContainsInput = wordToGuess?.contains(sanitizedInput.lowercase().toCharArray().first(), ignoreCase = true)
-        //Log.d("Andreas", wordContainsInput.toString())
-        val countOfInputInWord = wordToGuess?.count{
-            //Log.d("Andreas", it.toString() + sanitizedInput.contains(it).toString())
+
+        // https://stackoverflow.com/questions/60028103/how-to-remove-all-the-whitespaces-from-a-string-in-kotlin
+
+
+        var wordToGuess = word.value?.filter { !it.isWhitespace() }?.lowercase()
+
+
+        var wordContainsInput = wordToGuess?.contains(
+            sanitizedInput.lowercase().toCharArray().first(),
+            ignoreCase = true
+        )
+
+        val countOfInputInWord = wordToGuess?.count {
+
             sanitizedInput.contains(it)
         }
-        // Log.d("Andreas", countOfInputInWord.toString())
+
+
         if (wordContainsInput!!) {
-           var pointsToWin = countOfInputInWord!! * 100
+            var pointsToWin = countOfInputInWord!! * 2
+            Log.d("Andreas", pointsToWin.toString())
             _points.value = points.value!! + pointsToWin
+            Log.d("Andreas", _points.value.toString())
         } else {
             _health.value = health.value!! - 1
         }
-        val indexes = mutableListOf<Int>()
+        Log.d("Andreas", wordToGuess.toString())
+        var lettersInWordList = wordToGuess?.toList()
 
-        wordToGuess?.forEachIndexed { index, char ->
-            if(Char.equals(wordContainsInput)) {
-                indexes.add(index)
-            }
+        Log.d("andreas", guessedInputList.toString() )
+        Log.d("andreas", lettersInWordList.toString() )
+        if(guessedInputList.containsAll(lettersInWordList!!)) {
+            Log.d("Andreas", "du har vundet et eller andet" )
+            isWinner = true
 
         }
+
 
     }
 
@@ -115,8 +149,6 @@ class GameViewModel : ViewModel() {
     }
 
 
-
-
     fun spinWheel(): Boolean {
 
         val result = when ((0..100).random()) {
@@ -125,29 +157,26 @@ class GameViewModel : ViewModel() {
             in 82..95 -> "Misset tur"
             else -> "bankerot"
         }
-        if(result == "Misset tur") {
+        if (result == "Misset tur") {
             handleMissedTurn()
 
 
         }
-        if(result == "bankerot") {
+        if (result == "bankerot") {
             handleBankrupt()
         }
 
-        if(result == "Ekstra forsøg") {
+        if (result == "Ekstra forsøg") {
             handleExtraTurn()
             return false
 
         }
 
-        if(result == "Guess Word")
-        {
+        if (result == "Guess Word") {
             return false
         }
 
-            return true
-        result
+        return true
+
     }
-
-
 }
